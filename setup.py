@@ -45,7 +45,7 @@ setuptools.setup(
     ],
      entry_points={
         'console_scripts': [
-            'lintlkml = linter:main',
+            'lookml-linter = linter:main',
         ]
     }
 )
