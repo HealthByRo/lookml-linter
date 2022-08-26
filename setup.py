@@ -43,4 +43,9 @@ setuptools.setup(
         "typing-extensions==4.2.0",
         "urllib3==1.26.9",
     ],
+     entry_points={
+        'console_scripts': [
+            'lintlkml = linter:main',
+        ]
+    }
 )
