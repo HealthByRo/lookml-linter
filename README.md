@@ -116,7 +116,7 @@ Rules can also accept custom parameters.  To specify a series of parameters that
 ```
 
 
-### AIn this example, the `field_sql_html_requires_user_attribute_when_search_terms_found` rule will be run once per param set, and the rule’s run method will be able to access `user_attribute` and `search_terms`:
+In this example, the `field_sql_html_requires_user_attribute_when_search_terms_found` rule will be run once per param set, and the rule’s run method will be able to access `user_attribute` and `search_terms`:
 
 ``` 
 user_attribute = self.params['user_attribute']
@@ -125,35 +125,19 @@ search_terms = self.params['search_terms'] \
 ```
 
 
-## 
-**Notable Requirements**
 
-
-
-*   [Python 3.8x+](https://www.python.org/downloads/)
-*   [Pipenv](https://pipenv.pypa.io/en/latest/install/)
-*   Lkml
-*   [Looker-sdk](https://docs.looker.com/reference/api-and-integration/api-sdk)
-*   [Argparse](https://docs.python.org/3/library/argparse.html)
-*   [pyyaml](https://pyyaml.org/)
-
-For a full list of the requirements, please see this [page](https://github.com/rbob86/lookml-linter/blob/main/requirements.txt). 
 
 
 ## 
 **Installation**
 
-
-
-*   To run this locally, run pipenv install to install third-party requirements inside the pipenv virtual environment.
-*   Run
+Install via `pip install .`
 
 ## 
 **Running**
 
 *   Configure your config.yaml file to reflect the severities and parameters you want to apply to each rule.
-*   Run pipenv shell to enter the virtual environment.
-*   Run python -m linter.main &lt;path_to_config_file.yaml> to run the program.
+*   Run with command `lookmllint`
 
 ## 
 **Output**
