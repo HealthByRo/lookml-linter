@@ -24,7 +24,6 @@ class LookMlProjectParser:
         self.parsed_lookml_files = {}
 
         for filepath in lkml_filepaths:
-            print(f"filepath {filepath}")
 
             if not os.path.exists(filepath):
                 raise IOError("Filename does not exist: %s" % filepath)
