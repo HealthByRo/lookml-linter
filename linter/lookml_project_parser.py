@@ -1,6 +1,7 @@
 import os
 import lkml
 import glob
+import argparse
 
 
 class LookMlProjectParser:
@@ -14,10 +15,8 @@ class LookMlProjectParser:
 
         '''
         self.lkml_dir = lkml_dir
-
         if os.path.isdir(self.lkml_dir):
-            lkml_filepaths = [f for f in glob.glob(
-                self.lkml_dir + "**/*.lkml", recursive=True)]
+            lkml_filepaths = [os.path.join(dp, f) for dp, dn, filenames in os.walk(self.lkml_dir) for f in filenames if os.path.splitext(f)[1] == '.lkml'] #use instead of glob - glob not searching mounted docker volume subdirectories 
         else:
             raise IOError("Directory does not exist: %s" %
                           self.lkml_dir)
@@ -25,6 +24,7 @@ class LookMlProjectParser:
         self.parsed_lookml_files = {}
 
         for filepath in lkml_filepaths:
+            print(f"filepath {filepath}")
 
             if not os.path.exists(filepath):
                 raise IOError("Filename does not exist: %s" % filepath)
