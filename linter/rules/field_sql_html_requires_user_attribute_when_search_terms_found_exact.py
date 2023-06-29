@@ -14,7 +14,7 @@ class FieldSqlHtmlRequiresUserAttributeWhenSearchTermsFoundExact(Rule):
         search_terms_match_in_name_label_description = any(
             [word == search_pattern.strip() for word in search_terms])
         user_attribute_check_in_sql_html = not all([user_attribute_search_term in string for
-                                                    string in [field.get('sql', ''), field.get('html', '')]])
+                                                    string in [field.get('required_access_grants', '')]])
         if search_terms_match_in_name_label_description and user_attribute_check_in_sql_html:
             return False
         return True
