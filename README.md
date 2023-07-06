@@ -55,8 +55,6 @@ The linter parses the LookML files in the project and checks if there are any ex
     *   This rule checks if all explore objects have a description parameter defined. 
 *   FieldRequiresDescription
     *   This rule checks that all fields (measures, dimensions, and dimension_groups) have descriptions added. 
-*   FieldSqlHtmlRequiresUserAttributeWhenSearchTermsFound
-    *   This rule checks fields with the search term in the name use a specific user_attribute to limit the field access. 
 *   ViewWithDimensionsAndMeasuresHasOnePrimaryKey
     *   This rule checks to make sure that views have one field defined as the primary key. 
 *   ViewWithManyFieldsRequiresFieldsHiddenByDefault
@@ -89,7 +87,7 @@ Severity** **attributes can be one of the following:
 Rules can also accept custom parameters.  To specify a series of parameters that should be applied to a rule, add a `param_sets` array to the configuration file, e.g.:
 
 ``` 
-- rule: field_sql_html_requires_user_attribute_when_search_terms_found
+- rule: field_match_to_required_access_grant
 
   severity: error
 
@@ -116,7 +114,7 @@ Rules can also accept custom parameters.  To specify a series of parameters that
 ```
 
 
-### AIn this example, the `field_sql_html_requires_user_attribute_when_search_terms_found` rule will be run once per param set, and the rule’s run method will be able to access `user_attribute` and `search_terms`:
+### In this example, the `field_match_to_required_access_grant` rule will be run once per param set, and the rule’s run method will be able to access `user_attribute` and `search_terms`:
 
 ``` 
 user_attribute = self.params['user_attribute']
@@ -145,15 +143,15 @@ For a full list of the requirements, please see this [page](https://github.com/r
 
 
 
-*   To run this locally, run pipenv install to install third-party requirements inside the pipenv virtual environment.
-*   Run
+*   To run locally, Install via `pip install .`
+   
 
 ## 
 **Running**
 
 *   Configure your config.yaml file to reflect the severities and parameters you want to apply to each rule.
-*   Run pipenv shell to enter the virtual environment.
-*   Run python -m linter.main &lt;path_to_config_file.yaml> to run the program.
+*   run `export INPUT_CONFIGFILE=/path/to/linter.config.yaml` eg. `export INPUT_CONFIGFILE=${HOME}/code/LookerRoMain/linter.config.yaml`
+*   Run with command `lookmllint`
 
 ## 
 **Output**
