@@ -1,17 +1,19 @@
+> **:warning: This fork is not currently maintained and will be archived then removed in the future.**
+
 # **LookML Linter**
 
 
-## 
+##
 **Overview**
 
 The LookML Linter serves as a tool to enforce LookML security and style best practices as  part of a CI/CD pipeline. This specific version was designed to leverage Github Actions (for more information about Github Actions, check out this blog [post](https://github.blog/2022-02-02-build-ci-cd-pipeline-github-actions-four-steps/)). The recommendation is to use this linter with a series of other open-source github action scripts in your Github Action workflow ([repo](https://github.com/eric-lyons/github_actions_looker_cicd)). This will run on push or pull request (PR) events.
 
-A typical workflow would look like this: the linter gets triggered when a developer creates a PR with the latest feature changes. A pipeline is triggered and the linter would run and print out any warnings or errors. The linter scans all the lkml files passed into the working directory where the action is run.  If there are just linter warnings, the developer could still merge the PR, but if there were errors the linter will fail and the developer is blocked from merging the PR. 
+A typical workflow would look like this: the linter gets triggered when a developer creates a PR with the latest feature changes. A pipeline is triggered and the linter would run and print out any warnings or errors. The linter scans all the lkml files passed into the working directory where the action is run.  If there are just linter warnings, the developer could still merge the PR, but if there were errors the linter will fail and the developer is blocked from merging the PR.
 
 
 ### **How to set up config file**
 
-Below is a sample configuration file for a github action workflow yaml file. 
+Below is a sample configuration file for a github action workflow yaml file.
 
 
 ```
@@ -38,7 +40,7 @@ jobs:
 
 ### **Rules**
 
-The linter parses the LookML files in the project and checks if there are any exceptions to the rules defined in the `/linter/rules` directory. There are some predefined rules built into the linter, but **_please customize_** them as needed and contribute your own rules which you and your team find helpful for security and style best practices. **We implore you to extend this and use this repo as a framework to structure your own governance practices around.** This can even be accompanied by the [lmanage](https://github.com/looker-open-source/lmanage) library which helps maintain security best practices or Security as Code. 
+The linter parses the LookML files in the project and checks if there are any exceptions to the rules defined in the `/linter/rules` directory. There are some predefined rules built into the linter, but **_please customize_** them as needed and contribute your own rules which you and your team find helpful for security and style best practices. **We implore you to extend this and use this repo as a framework to structure your own governance practices around.** This can even be accompanied by the [lmanage](https://github.com/looker-open-source/lmanage) library which helps maintain security best practices or Security as Code.
 
 
 ## Prebuilt Rules
@@ -46,19 +48,19 @@ The linter parses the LookML files in the project and checks if there are any ex
 
 
 *   DimensionGroupOfTypeTimeRequiresDatatype
-    *   This rule checks to see if dimension_groups of type time have a datatype parameter specified. 
-*   DimensionGroupOfTypeTimeRequiresTimeframe 
-    *   This rule checks if dimension_groups of type time have a timeframe parameter explicitly specified. 
+    *   This rule checks to see if dimension_groups of type time have a datatype parameter specified.
+*   DimensionGroupOfTypeTimeRequiresTimeframe
+    *   This rule checks if dimension_groups of type time have a timeframe parameter explicitly specified.
 *   ExploreJoinsRequireRelationship
-    *   This rule checks that a relationship parameter is explicitly used on joins in explore objects. 
+    *   This rule checks that a relationship parameter is explicitly used on joins in explore objects.
 *   ExploreRequiresDescription
-    *   This rule checks if all explore objects have a description parameter defined. 
+    *   This rule checks if all explore objects have a description parameter defined.
 *   FieldRequiresDescription
-    *   This rule checks that all fields (measures, dimensions, and dimension_groups) have descriptions added. 
+    *   This rule checks that all fields (measures, dimensions, and dimension_groups) have descriptions added.
 *   ViewWithDimensionsAndMeasuresHasOnePrimaryKey
-    *   This rule checks to make sure that views have one field defined as the primary key. 
+    *   This rule checks to make sure that views have one field defined as the primary key.
 *   ViewWithManyFieldsRequiresFieldsHiddenByDefault
-    *   This rule checks that views with over 50 fields enumerated have the hidden_by_default parameter set. 
+    *   This rule checks that views with over 50 fields enumerated have the hidden_by_default parameter set.
 
 
 ### **Configuration File**
@@ -86,7 +88,7 @@ Severity** **attributes can be one of the following:
 
 Rules can also accept custom parameters.  To specify a series of parameters that should be applied to a rule, add a `param_sets` array to the configuration file, e.g.:
 
-``` 
+```
 - rule: field_match_to_required_access_grant
 
   severity: error
@@ -116,14 +118,14 @@ Rules can also accept custom parameters.  To specify a series of parameters that
 
 ### In this example, the `field_match_to_required_access_grant` rule will be run once per param set, and the rule’s run method will be able to access `user_attribute` and `search_terms`:
 
-``` 
+```
 user_attribute = self.params['user_attribute']
 
 search_terms = self.params['search_terms'] \
 ```
 
 
-## 
+##
 **Notable Requirements**
 
 
@@ -135,25 +137,25 @@ search_terms = self.params['search_terms'] \
 *   [Argparse](https://docs.python.org/3/library/argparse.html)
 *   [pyyaml](https://pyyaml.org/)
 
-For a full list of the requirements, please see this [page](https://github.com/rbob86/lookml-linter/blob/main/requirements.txt). 
+For a full list of the requirements, please see this [page](https://github.com/rbob86/lookml-linter/blob/main/requirements.txt).
 
 
-## 
+##
 **Installation**
 
 
 
 *   To run locally, Install via `pip install .`
-   
 
-## 
+
+##
 **Running**
 
 *   Configure your config.yaml file to reflect the severities and parameters you want to apply to each rule.
 *   run `export INPUT_CONFIGFILE=/path/to/linter.config.yaml` eg. `export INPUT_CONFIGFILE=${HOME}/code/LookerRoMain/linter.config.yaml`
 *   Run with command `lookmllint`
 
-## 
+##
 **Output**
 
 
@@ -165,25 +167,25 @@ For a full list of the requirements, please see this [page](https://github.com/r
 ![alt_text](images/image1.png "image_tooltip")
 
 
-The output will begin with the file name, followed by the list of errors and warnings. THis will show the object name and the violated rule. 
+The output will begin with the file name, followed by the list of errors and warnings. THis will show the object name and the violated rule.
 
 
-## 
+##
 **Tests**
 
 
-## 
-A full unit test suite has been added to ensure quality and accuracy of the linter. 
+##
+A full unit test suite has been added to ensure quality and accuracy of the linter.
 
 
 ## Adding a rule
 
 Create file in the rule directory. Be very explicit about the rule name.
 
-In that file we define a class for that rule. This always accepts the arg rule. The class needs an apply_to for the objects it applies to and a run method. 
+In that file we define a class for that rule. This always accepts the arg rule. The class needs an apply_to for the objects it applies to and a run method.
 
-Update the import statements in the rule_factory.py file. 
+Update the import statements in the rule_factory.py file.
 
-Finally update the config file to have the rule run. If a rule is not explicitly listed in the config file it will not run. 
+Finally update the config file to have the rule run. If a rule is not explicitly listed in the config file it will not run.
 
-We recommend adding unit tests for each additional rule. 
+We recommend adding unit tests for each additional rule.
